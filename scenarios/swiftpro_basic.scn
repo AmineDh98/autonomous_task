@@ -2,7 +2,8 @@
 <scenario>
 	<solver>
 		<erp value="0.5"/>
-		<erp2 value="0.8"/>
+		<stop_erp value="0.25"/>
+		<erp2 value="0.9"/>
 		<global_damping value="0.25"/>
 	</solver>
 

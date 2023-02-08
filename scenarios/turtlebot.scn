@@ -4,6 +4,7 @@
 		<look name="black_plastic" gray="0.05" roughness="0.5"/>
 		<look name="silver_anode" rgb="0.8 0.8 0.85" roughness="0.5" metalness="1.0"/>
 		<look name="black_anodized" gray="0.05" roughness="0.4" metalness="1.0"/>
+		<look name="rubber" gray="0.05" roughness="1.0"/>
 	</looks>
 
 	<robot name="$(arg robot_name)" fixed="false" self_collisions="false" algorithm="general">
@@ -26,7 +27,7 @@
 			<external_part name="CasterFront" type="sphere" physics="surface">
 				<dimensions radius="0.0165"/>
 				<origin rpy="0.0 0.0 0.0" xyz="0.0982 0.0 0.18138"/>
-				<material name="Plastic"/>
+				<material name="Caster"/>
 				<look name="black_plastic"/>
 				<compound_transform rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
 			</external_part>
@@ -34,7 +35,7 @@
 			<external_part name="CasterBack" type="sphere" physics="surface">
 				<dimensions radius="0.0165"/>
 				<origin rpy="0.0 0.0 0.0" xyz="-0.152 0.0 0.18138"/>
-				<material name="Plastic"/>
+				<material name="Caster"/>
 				<look name="black_plastic"/>
 				<compound_transform rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
 			</external_part>
@@ -116,16 +117,16 @@
 			</external_part>
 		</base_link>
 
-		<link name="WheelL" type="torus" physics="surface">
-			<dimensions major_radius="0.025" minor_radius="0.01"/>
-    		<origin rpy="0.0 0.0 0.0" xyz="-0.014 -0.11501 0.16307"/>
+		<link name="WheelL" type="cylinder" physics="surface">
+			<dimensions radius="0.035" height="0.02"/>
+    		<origin rpy="${pi/2.0} 0.0 0.0" xyz="-0.014 -0.11501 0.16307"/>
     		<material name="Rubber1"/>
     		<look name="rubber"/>
 		</link>
 
-		<link name="WheelR" type="torus" physics="surface">
-			<dimensions major_radius="0.025" minor_radius="0.01"/>
-    		<origin rpy="0.0 0.0 0.0" xyz="-0.014 0.11501 0.16307"/>
+		<link name="WheelR" type="cylinder" physics="surface">
+			<dimensions radius="0.035" height="0.02"/>
+    		<origin rpy="${pi/2.0} 0.0 0.0" xyz="-0.014 0.11501 0.16307"/>
     		<material name="Rubber2"/>
     		<look name="rubber"/>
 		</link>
@@ -387,7 +388,7 @@
 		</actuator>
 
 		<actuator name="kobuki/wheel_servo_right" type="servo">
-			<joint name="kobuki_wheel_right_joint"/>
+			<joint name="kobuki/wheel_right_joint"/>
 			<controller position_gain="1.0" velocity_gain="1.0" max_torque="1000.0"/>
 		</actuator>
 
@@ -438,9 +439,9 @@
 
 		<sensor name="kobuki/realsense_color" rate="30.0" type="camera">
 			<specs resolution_x="1920" resolution_y="1080" horizontal_fov="69.0"/>
+			<visual filename="$(find kobuki_description)/resources/meshes/realsense.obj" scale="1.0" look="black_plastic"/>
 			<origin xyz="0.122 -0.033 0.082" rpy="${pi/2.0} 0.0 ${pi/2.0}"/>
 			<link name="Base"/>
-			<!-- <visual filename="$(find kobuki_description)/resources/meshes/realsense.obj" scale="1.0" look="black_plastic"/> -->
 			<ros_publisher topic="/$(arg robot_name)/kobuki/sensors/realsense/color"/>
 		</sensor>
 

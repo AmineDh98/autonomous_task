@@ -21,7 +21,7 @@
 
         <!-- Load ROS Control -->
         <rosparam command="load" file="$(find swiftpro)/config/swiftpro.yaml" />
-	    <node name="state_spawner" pkg="controller_manager" type="spawner" output="screen" 
+	    <node name="controller_spawner" pkg="controller_manager" type="spawner" output="screen" 
 				args="joint_state_controller joint_velocity_controller" />
 
         <!-- Load robot description -->
