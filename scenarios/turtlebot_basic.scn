@@ -57,10 +57,17 @@
 	</static>
 
 	<static name="Box" type="box">
-		<dimensions xyz="0.5 0.5 0.5"/>
-		<material name="Plastic"/>
+		<dimensions xyz="1.0 1.0 1.0"/>
+		<material name="Concrete"/>
+		<look name="grid" uv_mode="1"/>
+		<world_transform rpy="0 0 0" xyz="2.0 2.0 -0.5"/>
+	</static>
+
+	<static name="Cylinder" type="cylinder">
+		<dimensions radius="0.5" height="1.0"/>
+		<material name="Concrete"/>
 		<look name="grid"/>
-		<world_transform rpy="0 0 0" xyz="2.0 2.0 0.0"/>
+		<world_transform rpy="0 0 0" xyz="3.0 -1.5 -0.5"/>
 	</static>
 
     <include file="$(find turtlebot_simulation)/scenarios/turtlebot.scn">

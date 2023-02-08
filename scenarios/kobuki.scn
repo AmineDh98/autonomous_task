@@ -2,6 +2,7 @@
 <scenario>
 	<looks>
 		<look name="black_plastic" gray="0.05" roughness="0.5"/>
+		<look name="silver_plastic" gray="0.7" roughness="0.1" metalness="0.5"/>
 		<look name="silver_anode" rgb="0.8 0.8 0.85" roughness="0.5" metalness="1.0"/>
 		<look name="rubber" gray="0.05" roughness="1.0"/>
 	</looks>
@@ -166,7 +167,7 @@
 
 		<sensor name="realsense_color" rate="30.0" type="camera">
 			<specs resolution_x="1920" resolution_y="1080" horizontal_fov="69.0"/>
-			<visual filename="$(find kobuki_description)/resources/meshes/realsense.obj" scale="1.0" look="black_plastic"/>
+			<visual filename="$(find kobuki_description)/resources/meshes/realsense.obj" scale="1.0" look="silver_plastic"/>
 			<origin xyz="0.122 -0.033 0.082" rpy="${pi/2.0} 0.0 ${pi/2.0}"/>
 			<link name="Base"/>
 			<ros_publisher topic="/$(arg robot_name)/sensors/realsense/color"/>
