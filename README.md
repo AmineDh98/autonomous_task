@@ -59,3 +59,10 @@ You will find three launch files in the turtlebot_simulation package: kobuki_bas
 Launch any of those to run either the mobile base alone, the manipulator alone, or the whole robot respectively.
 
 
+## Troubleshooting
+
+We have experienced some students not having xacro installed, though it should be installed with the desktop-full installation of ros. To install xacro just:
+
+```bash
+sudo apt install ros-noetic-xacro
+```
