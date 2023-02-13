@@ -413,12 +413,12 @@
 			<controller position_gain="1.0" velocity_gain="1.0" max_torque="1000.0"/>
 		</actuator>
 
-		<sensor name="kobuki/wheel_encoder_left" rate="10.0" type="encoder">
+		<sensor name="kobuki/wheel_encoder_left" rate="100.0" type="encoder">
 			<joint name="kobuki/wheel_left_joint"/>
 			<ros_publisher topic="/$(arg robot_name)/joint_states" />
 		</sensor>
 
-		<sensor name="kobuki/wheel_encoder_right" rate="10.0" type="encoder">
+		<sensor name="kobuki/wheel_encoder_right" rate="100.0" type="encoder">
 			<joint name="kobuki/wheel_right_joint"/>
 			<ros_publisher topic="/$(arg robot_name)/joint_states" />
 		</sensor>

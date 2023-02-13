@@ -7,7 +7,8 @@
 		<look name="rubber" gray="0.05" roughness="1.0"/>
 	</looks>
 
-	<robot name="$(arg robot_name)" fixed="false" self_collisions="false" algorithm="general">
+	<!-- <robot name="$(arg robot_name)" fixed="false" self_collisions="false" algorithm="general"> -->
+	<robot name="$(arg robot_name)" fixed="false" self_collisions="false" algorithm="featherstone">
 		<base_link name="Base" type="compound" physics="surface">
 			<external_part name="MainBody" type="model" physics="surface">
 				<physical>
@@ -104,14 +105,14 @@
 
 		<link name="WheelL" type="cylinder" physics="surface">
 			<dimensions radius="0.035" height="0.02"/>
-    		<origin rpy="${pi/2.0} 0.0 0.0" xyz="-0.014 -0.11501 0.16307"/>
+    		<origin rpy="${pi/2.0} 0.0 0.0" xyz="0.0 0.0 0.0"/>
     		<material name="Rubber1"/>
     		<look name="rubber"/>
 		</link>
 
 		<link name="WheelR" type="cylinder" physics="surface">
 			<dimensions radius="0.035" height="0.02"/>
-    		<origin rpy="${pi/2.0} 0.0 0.0" xyz="-0.014 0.11501 0.16307"/>
+    		<origin rpy="${pi/2.0} 0.0 0.0" xyz="0.0 0.0 0.0"/>
     		<material name="Rubber2"/>
     		<look name="rubber"/>
 		</link>
@@ -140,12 +141,12 @@
 			<controller position_gain="1.0" velocity_gain="1.0" max_torque="1000.0"/>
 		</actuator>
 
-		<sensor name="wheel_encoder_left" rate="10.0" type="encoder">
+		<sensor name="wheel_encoder_left" rate="100.0" type="encoder">
 			<joint name="wheel_left_joint"/>
 			<ros_publisher topic="/$(arg robot_name)/joint_states" />
 		</sensor>
 
-		<sensor name="wheel_encoder_right" rate="10.0" type="encoder">
+		<sensor name="wheel_encoder_right" rate="100.0" type="encoder">
 			<joint name="wheel_right_joint"/>
 			<ros_publisher topic="/$(arg robot_name)/joint_states" />
 		</sensor>
