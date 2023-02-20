@@ -3,7 +3,7 @@
     <arg name="robot_name" default="kobuki"/>
     <arg name="simulation_data" default="$(find turtlebot_simulation)/resources"/>
     <arg name="scenario_description" default="$(find turtlebot_simulation)/scenarios/kobuki_basic.scn"/>
-    <arg name="simulation_rate" default="1000.0"/>
+    <arg name="simulation_rate" default="300.0"/>
     <arg name="graphics_resolution" default="1200 800"/>
     <arg name="graphics_quality" default="high"/>
     

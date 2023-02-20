@@ -7,7 +7,6 @@
 		<look name="rubber" gray="0.05" roughness="1.0"/>
 	</looks>
 
-	<!-- <robot name="$(arg robot_name)" fixed="false" self_collisions="false" algorithm="general"> -->
 	<robot name="$(arg robot_name)" fixed="false" self_collisions="false" algorithm="featherstone">
 		<base_link name="Base" type="compound" physics="surface">
 			<external_part name="MainBody" type="model" physics="surface">
@@ -120,14 +119,14 @@
 		<joint name="wheel_left_joint" type="revolute">
 			<parent name="Base"/>
 			<child name="WheelL"/>
-			<origin rpy="0.0 0.0 0.0" xyz="-0.014 -0.11501 0.16307"/>
+			<origin rpy="0.0 0.0 ${pi}" xyz="-0.014 -0.11501 0.16307"/>
 			<axis xyz="0.0 1.0 0.0"/>
 		</joint>
 
 		<joint name="wheel_right_joint" type="revolute">
 			<parent name="Base"/>
 			<child name="WheelR"/>
-			<origin rpy="0.0 0.0 0.0" xyz="-0.014 0.11501 0.16307"/>
+			<origin rpy="0.0 0.0 ${pi}" xyz="-0.014 0.11501 0.16307"/>
 			<axis xyz="0.0 1.0 0.0"/>
 		</joint>
 
