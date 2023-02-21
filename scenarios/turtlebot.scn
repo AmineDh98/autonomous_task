@@ -6,6 +6,7 @@
 		<look name="silver_anode" rgb="0.8 0.8 0.85" roughness="0.5" metalness="1.0"/>
 		<look name="black_anodized" gray="0.05" roughness="0.4" metalness="1.0"/>
 		<look name="rubber" gray="0.05" roughness="1.0"/>
+		<look name="suction_cup" gray="0.90" roughness="0.5" metalness="0.0"/>
 	</looks>
 
 	<robot name="$(arg robot_name)" fixed="false" self_collisions="false" algorithm="general">
@@ -238,18 +239,36 @@
 			<look name="black_anodized"/>
 		</link>
 
-		<link name="Link8b" type="model" physics="surface">
-			<physical>
-				<mesh filename="$(find swiftpro_description)/resources/meshes/link8b_phy.obj" scale="1.0"/>
-				<origin rpy="0.0 0.0 $(arg arm_yaw)" xyz="$(arg arm_x) $(arg arm_y) $(arg arm_z)"/>
-			</physical>
-			<visual>
-				<mesh filename="$(find swiftpro_description)/resources/meshes/link8b.obj" scale="1.0"/>
-				<origin rpy="0.0 0.0 $(arg arm_yaw)" xyz="$(arg arm_x) $(arg arm_y) $(arg arm_z)"/>
-			</visual>
-			<material name="Aluminium"/>
-			<mass value="0.025"/>
-			<look name="black_anodized"/>
+		<link name="Link8b" type="compound" physics="surface">
+			<external_part name="Link8bValve" type="model" physics="surface">
+				<physical>
+					<mesh filename="$(find swiftpro_description)/resources/meshes/link8b_phy.obj" scale="1.0"/>
+					<origin rpy="0.0 0.0 $(arg arm_yaw)" xyz="$(arg arm_x) $(arg arm_y) $(arg arm_z)"/>
+				</physical>
+				<visual>
+					<mesh filename="$(find swiftpro_description)/resources/meshes/link8b.obj" scale="1.0"/>
+					<origin rpy="0.0 0.0 $(arg arm_yaw)" xyz="$(arg arm_x) $(arg arm_y) $(arg arm_z)"/>
+				</visual>
+				<material name="Aluminium"/>
+				<mass value="0.015"/>
+				<look name="black_anodized"/>
+				<compound_transform rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+			</external_part>
+			<external_part name="Link8bCup" type="model" physics="surface">
+				<physical>
+					<mesh filename="$(find swiftpro_description)/resources/meshes/link8bcup_phy.obj" scale="1.0"/>
+					<origin rpy="0.0 0.0 $(arg arm_yaw)" xyz="$(arg arm_x) $(arg arm_y) $(arg arm_z)"/>
+				</physical>
+				<visual>
+					<mesh filename="$(find swiftpro_description)/resources/meshes/link8bcup.obj" scale="1.0"/>
+					<origin rpy="0.0 0.0 $(arg arm_yaw)" xyz="$(arg arm_x) $(arg arm_y) $(arg arm_z)"/>
+				</visual>
+				<material name="Aluminium"/>
+				<mass value="0.005"/>
+				<look name="suction_cup"/>
+				<compound_transform rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+			</external_part>
+			<contact stiffness="100000.0" damping="0.5"/>
 		</link>
 	
 		<link name="Link9" type="model" physics="surface">
@@ -268,14 +287,14 @@
 		<joint name="kobuki/wheel_left_joint" type="revolute">
 			<parent name="Base"/>
 			<child name="WheelL"/>
-			<origin rpy="0.0 0.0 0.0" xyz="-0.014 -0.11501 0.16307"/>
+			<origin rpy="0.0 0.0 ${pi}" xyz="-0.014 -0.11501 0.16307"/>
 			<axis xyz="0.0 1.0 0.0"/>
 		</joint>
 
 		<joint name="kobuki/wheel_right_joint" type="revolute">
 			<parent name="Base"/>
 			<child name="WheelR"/>
-			<origin rpy="0.0 0.0 0.0" xyz="-0.014 0.11501 0.16307"/>
+			<origin rpy="0.0 0.0 ${pi}" xyz="-0.014 0.11501 0.16307"/>
 			<axis xyz="0.0 1.0 0.0"/>
 		</joint>
 
@@ -292,7 +311,7 @@
 			<child name="Link2"/>
 			<origin rpy="0.0 0.0 $(arg arm_yaw)" xyz="${$(arg arm_x) + cos($(arg arm_yaw))*0.0133} ${$(arg arm_y) + sin($(arg arm_yaw))*0.0133} ${$(arg arm_z)-0.1056}"/>
 			<axis xyz="0.0 1.0 0.0"/>
-			<limits min="${-pi/2.0}" max="${pi/2.0}"/>
+			<limits min="${-pi/2.0}" max="0.05"/>
 		</joint>
 
 		<joint name="swifpro/passive_joint1" type="revolute">
@@ -300,7 +319,6 @@
 			<child name="Link3"/>
 			<origin rpy="0.0 0.0 $(arg arm_yaw)" xyz="${$(arg arm_x) + cos($(arg arm_yaw))*0.0133} ${$(arg arm_y) + sin($(arg arm_yaw))*0.0133} ${$(arg arm_z)-0.2476}"/>
 			<axis xyz="0.0 1.0 0.0"/>
-			<limits min="${-pi/2.0}" max="${pi/2.0}"/>
 		</joint>
 
 		<joint name="swifpro/passive_joint2" type="revolute">
@@ -308,7 +326,6 @@
 			<child name="Link4"/>
 			<origin rpy="0.0 0.0 $(arg arm_yaw)" xyz="${$(arg arm_x) + cos($(arg arm_yaw))*0.0133} ${$(arg arm_y) + sin($(arg arm_yaw))*0.0133} ${$(arg arm_z)-0.2476}"/>
 			<axis xyz="0.0 1.0 0.0"/>
-			<limits min="${-pi/2.0}" max="${pi/2.0}"/>
 		</joint>
 
 		<joint name="swifpro/passive_joint3" type="revolute">
@@ -316,7 +333,6 @@
 			<child name="Link5"/>
 			<origin rpy="0.0 0.0 $(arg arm_yaw)" xyz="${$(arg arm_x) + cos($(arg arm_yaw))*-0.0214} ${$(arg arm_y) + sin($(arg arm_yaw))*-0.0214} ${$(arg arm_z)-0.1223}"/>
 			<axis xyz="0.0 1.0 0.0"/>
-			<limits min="${-pi/2.0}" max="${pi/2.0}"/>
 		</joint>
 
 		<joint name="swifpro/passive_joint4" type="revolute">
@@ -324,7 +340,6 @@
 			<child name="Link5"/>
 			<origin rpy="0.0 0.0 $(arg arm_yaw)" xyz="${$(arg arm_x) + cos($(arg arm_yaw))*-0.0214} ${$(arg arm_y) + sin($(arg arm_yaw))*-0.0214} ${$(arg arm_z)-0.2643}"/>
 			<axis xyz="0.0 1.0 0.0"/>
-			<limits min="${-pi/2.0}" max="${pi/2.0}"/>
 		</joint>
 
 		<joint name="swiftpro/joint3" type="revolute">
@@ -332,7 +347,7 @@
 			<child name="Link6"/>
 			<origin rpy="0.0 0.0 $(arg arm_yaw)" xyz="${$(arg arm_x) + cos($(arg arm_yaw))*0.0133} ${$(arg arm_y) + sin($(arg arm_yaw))*0.0133} ${$(arg arm_z)-0.1056}"/>
 			<axis xyz="0.0 1.0 0.0"/>
-			<limits min="${-pi/2.0}" max="${pi/2.0}"/>
+			<limits min="${-pi/2.0}" max="0.05"/>
 		</joint>
 
 		<joint name="swifpro/passive_joint5" type="revolute">
@@ -340,7 +355,6 @@
 			<child name="Link7"/>
 			<origin rpy="0.0 0.0 $(arg arm_yaw)" xyz="${$(arg arm_x) + cos($(arg arm_yaw))*-0.0322} ${$(arg arm_y) + sin($(arg arm_yaw))*-0.0322} ${$(arg arm_z)-0.1026}"/>
 			<axis xyz="0.0 1.0 0.0"/>
-			<limits min="${-pi/2.0}" max="${pi/2.0}"/>
 		</joint>
 
 		<joint name="swifpro/passive_joint6" type="revolute">
@@ -348,7 +362,6 @@
 			<child name="Link7"/>
 			<origin rpy="0.0 0.0 $(arg arm_yaw)" xyz="${$(arg arm_x) + cos($(arg arm_yaw))*-0.0322} ${$(arg arm_y) + sin($(arg arm_yaw))*-0.0322} ${$(arg arm_z)-0.2446}"/>
 			<axis xyz="0.0 1.0 0.0"/>
-			<limits min="${-pi/2.0}" max="${pi/2.0}"/>
 		</joint>
 
 		<joint name="swifpro/passive_joint7" type="revolute">
@@ -356,7 +369,6 @@
 			<child name="Link8a"/>
 			<origin rpy="0.0 0.0 $(arg arm_yaw)" xyz="${$(arg arm_x) + cos($(arg arm_yaw))*0.172} ${$(arg arm_y) + sin($(arg arm_yaw))*0.172} ${$(arg arm_z)-0.2476}"/>
 			<axis xyz="0.0 1.0 0.0"/>
-			<limits min="${-pi/2.0}" max="${pi/2.0}"/>
 		</joint>		
 
 		<joint name="swifpro/passive_joint8" type="revolute">
@@ -364,7 +376,6 @@
 			<child name="Link9"/>
 			<origin rpy="0.0 0.0 $(arg arm_yaw)" xyz="${$(arg arm_x) + cos($(arg arm_yaw))*0.1994} ${$(arg arm_y) + sin($(arg arm_yaw))*0.1994} ${$(arg arm_z)-0.2746}"/>
 			<axis xyz="0.0 1.0 0.0"/>
-			<limits min="${-pi/2.0}" max="${pi/2.0}"/>
 		</joint>
 
 		<joint name="swifpro/passive_joint9" type="revolute">
@@ -372,7 +383,6 @@
 			<child name="Link9"/>
 			<origin rpy="0.0 0.0 $(arg arm_yaw)" xyz="${$(arg arm_x) + cos($(arg arm_yaw))*0.0407} ${$(arg arm_y) + sin($(arg arm_yaw))*0.0407} ${$(arg arm_z)-0.2746}"/>
 			<axis xyz="0.0 1.0 0.0"/>
-			<limits min="${-pi/2.0}" max="${pi/2.0}"/>
 		</joint>
 
 		<joint name="swiftpro/joint4" type="revolute">
@@ -385,32 +395,39 @@
 
 		<actuator name="kobuki/wheel_servo_left" type="servo">
 			<joint name="kobuki/wheel_left_joint"/>
-			<controller position_gain="1.0" velocity_gain="1.0" max_torque="1000.0"/>
+			<controller position_gain="10.0" velocity_gain="0.0" max_torque="1000.0"/>
 		</actuator>
 
 		<actuator name="kobuki/wheel_servo_right" type="servo">
 			<joint name="kobuki/wheel_right_joint"/>
-			<controller position_gain="1.0" velocity_gain="1.0" max_torque="1000.0"/>
+			<controller position_gain="10.0" velocity_gain="0.0" max_torque="1000.0"/>
 		</actuator>
 
 		<actuator name="swiftpro/servo1" type="servo">
 			<joint name="swiftpro/joint1"/>
-			<controller position_gain="1.0" velocity_gain="1.0" max_torque="1000.0"/>
+			<controller position_gain="10.0" velocity_gain="0.0" max_torque="1000.0"/>
 		</actuator>
 
 		<actuator name="swiftpro/servo2" type="servo">
 			<joint name="swiftpro/joint2"/>
-			<controller position_gain="1.0" velocity_gain="1.0" max_torque="1000.0"/>
+			<controller position_gain="10.0" velocity_gain="0.0" max_torque="1000.0"/>
 		</actuator>
 
 		<actuator name="swiftpro/servo3" type="servo">
 			<joint name="swiftpro/joint3"/>
-			<controller position_gain="1.0" velocity_gain="1.0" max_torque="1000.0"/>
+			<controller position_gain="10.0" velocity_gain="0.0" max_torque="1000.0"/>
 		</actuator>
 
 		<actuator name="swiftpro/servo4" type="servo">
 			<joint name="swiftpro/joint4"/>
-			<controller position_gain="1.0" velocity_gain="1.0" max_torque="1000.0"/>
+			<controller position_gain="10.0" velocity_gain="0.0" max_torque="1000.0"/>
+		</actuator>
+
+		<actuator name="swiftpro/suction_cup" type="suction_cup">
+			<link name="Link8b"/>
+			<origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+			<ros_publisher topic="/$(arg robot_name)/swiftpro/vacuum_gripper/pump_state"/>
+			<ros_service topic="/$(arg robot_name)/swiftpro/vacuum_gripper/set_pump"/>
 		</actuator>
 
 		<sensor name="kobuki/wheel_encoder_left" rate="100.0" type="encoder">

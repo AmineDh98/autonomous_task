@@ -38,8 +38,17 @@
 		<world_transform rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
 	</static>
 
+	<!-- <dynamic name="Box" type="box">
+		<dimensions xyz="0.05 0.05 0.15"/>
+		<origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+		<material name="Plastic"/>
+		<look name="grid" uv_mode="2"/>
+		<mass value="0.1"/>
+		<world_transform rpy="0.0 0.0 0.0" xyz="0.0 0.20 -0.075"/>
+	</dynamic> -->
+
     <include file="$(find turtlebot_simulation)/scenarios/swiftpro.scn">
-		<arg name="robot_name" value="swiftpro"/>
+		<arg name="robot_name" value="$(param robot_name)"/>
 		<arg name="start_position" value="0.0 0.0 -0.01"/>
 		<arg name="start_yaw" value="1.57"/>
 	</include>
