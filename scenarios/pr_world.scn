@@ -25,8 +25,8 @@
 			<friction material1="Concrete" material2="Concrete" static="0.9" dynamic="0.7"/>
 			<friction material1="Concrete" material2="Plastic" static="0.6" dynamic="0.4"/>
 			<friction material1="Concrete" material2="Aluminium" static="0.6" dynamic="0.3"/>
-			<friction material1="Concrete" material2="Rubber1" static="0.9" dynamic="0.8"/>
-			<friction material1="Concrete" material2="Rubber2" static="0.9" dynamic="0.8"/>
+			<friction material1="Concrete" material2="Rubber1" static="0.05" dynamic="0.02"/> <!-- Left wheel -->
+			<friction material1="Concrete" material2="Rubber2" static="0.05" dynamic="0.02"/> <!-- Right wheel -->
 			<friction material1="Concrete" material2="Caster" static="0.1" dynamic="0.05"/>
 			<friction material1="Plastic" material2="Plastic" static="0.5" dynamic="0.2"/>
 			<friction material1="Plastic" material2="Aluminium" static="0.3" dynamic="0.1"/>
@@ -56,9 +56,40 @@
 		<world_transform rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
 	</static>
 
-    <include file="$(find turtlebot_simulation)/scenarios/kobuki.scn">
+    <include file="$(find turtlebot_simulation)/scenarios/pr_kobuki.scn">
 		<arg name="robot_name" value="$(param robot_name)"/>
 		<arg name="start_position" value="0.0 0.0 -0.2"/>
 		<arg name="start_yaw" value="0.0"/>
 	</include>
+
+	<!-- <comm name="Modem1" device_id="1" type="acoustic_modem">
+		<specs min_vertical_fov="0.0" max_vertical_fov="220.0" range="1000.0"/>
+		<connect device_id="11" occlusion_test="false"/>
+		<world_transform xyz="0.0 0.0 -2.0" rpy="0.0 0.0 0.0"/>
+	</comm> -->
+
+	<comm name="Modem2" device_id="2" type="acoustic_modem">
+		<specs min_vertical_fov="0.0" max_vertical_fov="220.0" range="1000.0"/>
+		<connect device_id="1" occlusion_test="false"/>
+		<world_transform xyz="7.0 5.0 -2.0" rpy="0.0 0.0 0.0"/>
+	</comm>
+
+	<comm name="Modem3" device_id="3" type="acoustic_modem">
+		<specs min_vertical_fov="0.0" max_vertical_fov="220.0" range="1000.0"/>
+		<connect device_id="1" occlusion_test="false"/>
+		<world_transform xyz="-5.0 5.0 -2.0" rpy="0.0 0.0 0.0"/>
+	</comm>
+
+	<comm name="Modem4" device_id="4" type="acoustic_modem">
+		<specs min_vertical_fov="0.0" max_vertical_fov="220.0" range="1000.0"/>
+		<connect device_id="1" occlusion_test="false"/>
+		<world_transform xyz="5.0 -5.0 -2.0" rpy="0.0 0.0 0.0"/>
+	</comm>
+
+	<comm name="Modem5" device_id="5" type="acoustic_modem">
+		<specs min_vertical_fov="0.0" max_vertical_fov="220.0" range="1000.0"/>
+		<connect device_id="1" occlusion_test="false"/>
+		<world_transform xyz="-5.0 -5.0 -2.0" rpy="0.0 0.0 0.0"/>
+	</comm>
+
 </scenario>
