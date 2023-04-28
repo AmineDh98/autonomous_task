@@ -3,7 +3,7 @@
 	<solver>
 		<erp value="0.5"/>
 		<stop_erp value="0.25"/>
-		<erp2 value="0.9"/>
+		<erp2 value="0.15"/>
 		<global_damping value="0.25"/>
 	</solver>
 
@@ -75,7 +75,7 @@
 		<arg name="start_position" value="0.0 0.0 -0.2"/>
 		<arg name="start_yaw" value="0.0"/>
 		<arg name="arm_yaw" value="${-pi/2.0}"/>
-		<arg name="arm_x" value="0.0367"/>
+		<arg name="arm_x" value="0.0507"/>
 		<arg name="arm_y" value="0.0"/>
 		<arg name="arm_z" value="0.0"/>
 	</include>

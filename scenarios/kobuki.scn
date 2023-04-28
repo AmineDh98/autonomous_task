@@ -26,7 +26,7 @@
 
 			<external_part name="CasterFront" type="sphere" physics="surface">
 				<dimensions radius="0.0165"/>
-				<origin rpy="0.0 0.0 0.0" xyz="0.0982 0.0 0.18138"/>
+				<origin rpy="0.0 0.0 0.0" xyz="0.1122 0.0 0.18138"/>
 				<material name="Caster"/>
 				<look name="black_plastic"/>
 				<compound_transform rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
@@ -34,7 +34,7 @@
 			
 			<external_part name="CasterBack" type="sphere" physics="surface">
 				<dimensions radius="0.0165"/>
-				<origin rpy="0.0 0.0 0.0" xyz="-0.152 0.0 0.18138"/>
+				<origin rpy="0.0 0.0 0.0" xyz="-0.138 0.0 0.18138"/>
 				<material name="Caster"/>
 				<look name="black_plastic"/>
 				<compound_transform rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
@@ -71,7 +71,7 @@
 
 			<external_part name="PillarLF" type="cylinder" physics="surface">
 				<dimensions radius="0.006" height="0.05"/>
-				<origin rpy="0.0 0.0 0.0" xyz="0.091 -0.099 0.031"/>
+				<origin rpy="0.0 0.0 0.0" xyz="0.105 -0.099 0.031"/>
 				<material name="Aluminium"/>
 				<look name="silver_anode"/>
 				<compound_transform rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
@@ -79,7 +79,7 @@
 
 			<external_part name="PillarRF" type="cylinder" physics="surface">
 				<dimensions radius="0.006" height="0.05"/>
-				<origin rpy="0.0 0.0 0.0" xyz="0.091 0.099 0.031"/>
+				<origin rpy="0.0 0.0 0.0" xyz="0.105 0.099 0.031"/>
 				<material name="Aluminium"/>
 				<look name="silver_anode"/>
 				<compound_transform rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
@@ -87,7 +87,7 @@
 
 			<external_part name="PillarLB" type="cylinder" physics="surface">
 				<dimensions radius="0.006" height="0.05"/>
-				<origin rpy="0.0 0.0 0.0" xyz="-0.123 -0.099 0.031"/>
+				<origin rpy="0.0 0.0 0.0" xyz="-0.109 -0.099 0.031"/>
 				<material name="Aluminium"/>
 				<look name="silver_anode"/>
 				<compound_transform rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
@@ -95,7 +95,7 @@
 
 			<external_part name="PillarRB" type="cylinder" physics="surface">
 				<dimensions radius="0.006" height="0.05"/>
-				<origin rpy="0.0 0.0 0.0" xyz="-0.123 0.099 0.031"/>
+				<origin rpy="0.0 0.0 0.0" xyz="-0.109 0.099 0.031"/>
 				<material name="Aluminium"/>
 				<look name="silver_anode"/>
 				<compound_transform rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
@@ -119,14 +119,14 @@
 		<joint name="wheel_left_joint" type="revolute">
 			<parent name="Base"/>
 			<child name="WheelL"/>
-			<origin rpy="0.0 0.0 ${pi}" xyz="-0.014 -0.11501 0.16307"/>
+			<origin rpy="0.0 0.0 ${pi}" xyz="0.0 -0.115 0.16307"/>
 			<axis xyz="0.0 1.0 0.0"/>
 		</joint>
 
 		<joint name="wheel_right_joint" type="revolute">
 			<parent name="Base"/>
 			<child name="WheelR"/>
-			<origin rpy="0.0 0.0 ${pi}" xyz="-0.014 0.11501 0.16307"/>
+			<origin rpy="0.0 0.0 ${pi}" xyz="0.0 0.115 0.16307"/>
 			<axis xyz="0.0 1.0 0.0"/>
 		</joint>
 
