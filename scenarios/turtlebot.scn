@@ -469,7 +469,15 @@
 			<link name="Base"/>
 			<ros_publisher topic="/$(arg robot_name)/kobuki/sensors/realsense/depth"/>
 		</sensor>
- 
+
+		<sensor name="kobuki/odometry" rate="100.0" type="odometry">
+			<noise position="0.00" velocity="0.00" angle="0.0" angular_velocity="0.0"/>
+			<history samples="1"/>
+			<origin xyz="0.0 0.0 -0.2" rpy="0.0 0.0 0.0"/>
+			<link name="Base"/>
+			<ros_publisher topic="/$(arg robot_name)/kobuki/ground_truth"/>
+		</sensor>
+		
 		<ros_joint_group_subscriber topic="/$(arg robot_name)/kobuki/commands/wheel_velocities" control_mode="velocity">
 			<joint name="kobuki/wheel_left_joint"/>
 			<joint name="kobuki/wheel_right_joint"/>
