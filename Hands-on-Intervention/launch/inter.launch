@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<launch>
+    <node name="x1" pkg="turtlebot_simulation" type="odometry.py" output="screen"/> 
+    <node name="x2" pkg="turtlebot_simulation" type="goal_setting.py" output="screen"/> 
+    <node name="x3" pkg="turtlebot_simulation" type="mob_hands_on_func_call_3_with_param.py" output="screen"/> 
+    
+ 
+</launch>  

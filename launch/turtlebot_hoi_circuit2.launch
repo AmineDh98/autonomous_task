@@ -1,5 +1,6 @@
 <launch>
     <!-- Configurable arguments -->
+    <param name="~frame_id" type="string" value="world" /> 
     <arg name="robot_name" default="turtlebot"/>
     <arg name="simulation_data" default="$(find turtlebot_simulation)/resources"/>
     <arg name="scenario_description" default="$(find turtlebot_simulation)/scenarios/turtlebot_hoi_circuit2.scn"/>
@@ -8,9 +9,16 @@
     <arg name="graphics_quality" default="high"/>
 
     <!-- Static transform -->
+    <node name="map_to_base_transform" pkg="tf2_ros" type="static_transform_publisher" args="0 0 0 0 0 0 world turtlebot/kobuki/base_footprint"/>
     <node name="realsense_color" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 camera_color_optical_frame $(arg robot_name)/kobuki/realsense_color 100"/>
     <node name="realsense_depth" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 camera_depth_optical_frame $(arg robot_name)/kobuki/realsense_depth 100"/>
 
+
+    <node pkg="turtlebot_simulation" type="laser_scan_to_point_cloud_node.py" name="laserscan_to_pointcloud"/>
+    <node pkg="octomap_server" type="octomap_server_node" name="octomap" output="screen">
+        <remap to="/laserscan_to_pointcloud/converted_pc" from="/cloud_in"/>
+    </node>
+    
     <!-- Namespace with robot name -->
     <group ns="$(arg robot_name)">
         <!-- Run Simulator -->
@@ -21,11 +29,11 @@
         </node>
 
         <!-- Load ROS Control -->
-        <group ns="swiftpro">
+        <!-- <group ns="swiftpro">
             <rosparam command="load" file="$(find turtlebot_simulation)/config/turtlebot.yaml" />
             <node name="controller_spawner" pkg="controller_manager" type="spawner" output="screen" 
                     args="joint_state_controller joint_velocity_controller" />
-        </group>
+        </group> -->
 
         <!-- Load robot description -->
         <param name="robot_description" command="$(find xacro)/xacro '$(find turtlebot_description)/urdf/turtlebot.urdf.xacro'" />

@@ -1,12 +1,12 @@
 <launch>
     <!-- Configurable arguments -->
-    <param name="~frame_id" type="string" value="world" /> 
+    <param name="~frame_id" type="string" value="world" />  
     <arg name="robot_name" default="turtlebot"/>
     <!-- <arg name="simulation_data" default="$(find turtlebot_simulation)/resources"/>
-    <arg name="scenario_description" default="$(find turtlebot_simulation)/scenarios/turtlebot_hoi_circuit1.scn"/>
+    <arg name="scenario_description" default="$(find turtlebot_simulation)/scenarios/turtlebot_hoi_circuit1_copy.scn"/>
     <arg name="simulation_rate" default="1000.0"/>
     <arg name="graphics_resolution" default="1200 800"/>
-    <arg name="graphics_quality" default="high"/> -->
+    <arg name="graphics_quality" default="high"/> -->  
 
 
     <!-- <node pkg="turtlebot_simulation" type="scratch_o_c_pose_aruco_slam_reality.py" name="differential_drive"/> -->
@@ -18,7 +18,7 @@
 
     <node name="realsense_color" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 camera_color_optical_frame $(arg robot_name)/kobuki/realsense_color 100"/>
     <node name="realsense_depth" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 camera_depth_optical_frame $(arg robot_name)/kobuki/realsense_depth 100"/>
-
+    
     <node pkg="turtlebot_simulation" type="laser_scan_to_point_cloud_node.py" name="laserscan_to_pointcloud"/>
     <node pkg="octomap_server" type="octomap_server_node" name="octomap" output="screen">
         <remap to="/laserscan_to_pointcloud/converted_pc" from="/cloud_in"/>
@@ -41,15 +41,19 @@
         </group> -->
 
         <!-- Load robot description -->
-        <!-- <param name="robot_description" command="$(find xacro)/xacro '$(find turtlebot_description)/urdf/turtlebot.urdf.xacro'" />
-        <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+        <!-- <param name="robot_description" command="$(find xacro)/xacro '$(find turtlebot_description)/urdf/turtlebot.urdf.xacro'" /> -->
+        <!-- <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
         <node name="swiftpro_rviz_node" pkg="swiftpro_description" type="swiftpro_rviz_node">
             <param name="namespace" value="$(arg robot_name)/swiftpro"/>
             <remap from="swiftpro_rviz_node/joint_states" to="joint_states"/>
+            <param name="fixed_frame" value="turtlebot/kobuki/base_footprint"/>
+            <param name="use_gui" value="true"/>
+            <param name="robot_description" command="$(find xacro)/xacro '$(find turtlebot_description)/urdf/turtlebot.urdf.xacro'"/>
+            <param name="tf_prefix" value="$(arg robot_name)"/>
         </node> -->
 
 
-        
+
         <!-- RVIZ -->
         <node pkg="rviz" type="rviz" name="rviz" args="-d $(find turtlebot_description)/rviz/turtlebot.rviz"/>
     </group>
